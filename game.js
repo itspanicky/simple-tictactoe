@@ -43,8 +43,33 @@ const start = (_rl, _isAI) => {
         }
       })
     } else {
-      // change board with ai input
+      // get ai input
+      console.log('AI is thinking...')
+      
+      const input = _players.getAIMove();
+      const updatedBoard = _board.update(board, marker, input )
 
+      if (!updatedBoard) {
+          // retake turn on invalid input
+          takeTurns(turn)
+        } else {
+
+          // update board with new board
+          board = updatedBoard;
+          _board.print(board)
+
+          if (!_board.isGameOver(board, marker)) {
+
+            // next player's turn
+            takeTurns(turn = turn === 'x' ? 'o' : 'x')
+          } else {
+
+            // win condition is met, game is over
+            console.log(`${name} wins!`)
+            _rl.close()
+          }
+        }
+      
     }
   }
 

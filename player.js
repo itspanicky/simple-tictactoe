@@ -21,7 +21,18 @@ const build = (_isAI) => {
   ]
 }
 
+const getAIMove = () => {
+  const columns = ['a', 'b', 'c']
+  const rows = [0, 1, 2]
+  let col = columns[Math.floor(Math.random() * columns.length)];
+  let row = rows[Math.floor(Math.random() * rows.length)];
+
+  return `${col} ${row}`
+}
+
 const currentPlayer = (players, turn) => players.find(_player => _player.marker === turn);
 
 exports.build = build
 exports.currentPlayer = currentPlayer
+exports.getAIMove = getAIMove
+
